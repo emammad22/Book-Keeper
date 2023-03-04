@@ -29,7 +29,7 @@ function formIsValid() {
 
     var urlR = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
 
-    if (!(urlR.test(url))) {
+    if ( !(urlR.test) && url.startsWith('https://')) {
         return false;
     }
 
@@ -155,8 +155,11 @@ document.body.addEventListener('click',(e)=> {
     const bookmarks = showSavedItems();
     const targettedItem = e.target.parentElement.className;
     for (let i = 0; i < bookmarks.length; i++) {
-        if(bookmarks[i].className == targettedItem){
+        if(bookmarks[i].className === targettedItem){
             localStorage.removeItem(`${bookmarks[i].children[1].children[1].innerText}`);
+            break;
+        }else{
+            continue;
         }
     }
 }
